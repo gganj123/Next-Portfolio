@@ -1,33 +1,34 @@
-import Animation from "../Animation";
+"use client";
+
+import { useEffect, useState } from "react";
 
 export default function Hero() {
   return (
     <>
-      <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-        <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
-          김도현
-        </h1>
-        <h3 className="title-font sm:text-4xl text-sm mb-4 font-medium text-gray-900">
-          사용자 경험과 협업에 진심을 담는 개발자
-        </h3>
-        <p className="mb-8 leading-relaxed">
-          Copper mug try-hard pitchfork pour-over freegan heirloom neutra air
-          plant cold-pressed tacos poke beard tote bag. Heirloom echo park
-          mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon
-          try-hard chambray.
-        </p>
-        <div className="flex justify-center">
-          <button className="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
-            Button
-          </button>
-          <button className="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
-            Button
-          </button>
+      <section className="text-gray-600 body-font">
+        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col relative">
+          {/* 겹치는 텍스트 레이어 */}
+          <div className="text-center lg:w-full w-full relative">
+            <h1 className="title-font sm:text-9xl text-3xl mb-4 font-medium text-gray-200 text-focus-in absolute flex items-center justify-center -translate-y-20">
+              Front-End
+            </h1>
+            <h1 className="title-font sm:text-6xl text-3xl mb-4 font-medium text-gray-900 tracking-in-contract-bck relative">
+              Front-End 김도현입니다.
+            </h1>
+            {/* 2초 뒤에 보이는 나머지 콘텐츠 */}
+
+            <>
+              <p className="mb-8 text-xl leading-relaxed text-focus-ine">
+                사용자의 입장에서 디테일을 고민하고, 팀원들과 협력해 더 나은
+                서비스를 만들어가는 개발자입니다. <br />
+                사용자와 팀 모두에게 긍정적인 가치를 제공하며, 끊임없이 배우고
+                성장하는 개발자가 되겠습니다.
+              </p>
+              <div className="flex justify-center"></div>
+            </>
+          </div>
         </div>
-      </div>
-      <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-        <Animation />
-      </div>
+      </section>
     </>
   );
 }

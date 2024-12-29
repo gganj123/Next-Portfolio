@@ -1,8 +1,15 @@
 "use client";
-import React from "react";
-import Lottie from "react-lottie-player";
+
+import dynamic from "next/dynamic";
+
+// SSR 비활성화된 Lottie 컴포넌트 로드
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 import lottieJson from "@/../public/Animation.json";
 
 export default function Animation() {
-  return <Lottie loop animationData={lottieJson} play />;
+  return (
+    <div>
+      <Lottie loop animationData={lottieJson} play />
+    </div>
+  );
 }
