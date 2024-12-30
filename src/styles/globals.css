@@ -24,8 +24,7 @@ body {
 
 @layer utilities {
   .tracking-in-expand {
-    -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1)
-      both;
+    -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
     animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   }
 
@@ -45,8 +44,7 @@ body {
 }
 
 .slide-in-bottom {
-  -webkit-animation: slide-in-bottom 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
+  -webkit-animation: slide-in-bottom 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-bottom 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 @-webkit-keyframes slide-in-bottom {
@@ -63,8 +61,8 @@ body {
 }
 @keyframes slide-in-bottom {
   0% {
-    -webkit-transform: translateY(1000px);
-    transform: translateY(1000px);
+    -webkit-transform: translateY(500px);
+    transform: translateY(500px);
     opacity: 0;
   }
   100% {
@@ -73,10 +71,36 @@ body {
     opacity: 1;
   }
 }
+.slide-in-bottom {
+  animation: slide-in-bottom 0.8s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 1s ease-in-out;
+}
+.fade-in-delay {
+  opacity: 0; /* 지연 동안 보이지 않도록 설정 */
+  animation: fade-in 0.8s ease-in-out 0.8s forwards;
+}
+
+.slide-in-expand {
+  animation: slide-in-expand 1s ease-in-out forwards;
+  overflow: hidden; /* 애니메이션 동안 내용이 보이지 않도록 설정 */
+}
 
 .tracking-out-expand {
-  -webkit-animation: tracking-out-expand 0.8s
-    cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: tracking-out-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: tracking-out-expand 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 @-webkit-keyframes tracking-out-expand {
@@ -134,10 +158,8 @@ body {
 }
 
 .tracking-in-contract-bck {
-  -webkit-animation: tracking-in-contract-bck 1s
-    cubic-bezier(0.215, 0.61, 0.355, 1) both;
-  animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.61, 0.355, 1)
-    both;
+  -webkit-animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  animation: tracking-in-contract-bck 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 @keyframes tracking-in-contract-bck {
   0% {
@@ -216,5 +238,133 @@ body {
     -webkit-filter: blur(0px);
     filter: blur(0px);
     opacity: 1;
+  }
+}
+@layer utilities {
+  .banner-section {
+    @apply w-full mt-0 pt-[230px];
+  }
+
+  .banner-slider-wrapper {
+    @apply relative w-full overflow-hidden;
+    height: calc(100vh - 240px);
+  }
+
+  .banner-slider-container {
+    @apply relative w-full h-full;
+  }
+
+  .banner-slide {
+    @apply absolute flex items-end pb-10 bg-center bg-cover bg-no-repeat transition-all;
+    width: 33.333%;
+    height: 100%;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .banner-slide-content {
+    @apply w-full p-6 text-white text-center opacity-100 transition-opacity;
+    transition: opacity 0.5s ease;
+  }
+
+  .banner-slide-title {
+    @apply text-2xl font-normal mb-1 tracking-in-expand leading-tight;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .banner-slide-subtitle {
+    @apply text-lg m-0 leading-snug;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .banner-navigation-button {
+    @apply absolute flex items-center justify-center rounded-full bg-black bg-opacity-50 text-white cursor-pointer transition-colors;
+    width: 50px;
+    height: 50px;
+    z-index: 10;
+    transition: background-color 0.3s ease;
+  }
+
+  .banner-navigation-button:hover {
+    @apply bg-opacity-70;
+  }
+
+  .banner-button-left {
+    @apply left-5 top-1/2 transform -translate-y-1/2;
+  }
+
+  .banner-button-right {
+    @apply right-5 top-1/2 transform -translate-y-1/2;
+  }
+}
+
+@media (max-width: 1200px) {
+  .banner-section {
+    @apply pt-[180px];
+  }
+
+  .banner-slider-wrapper {
+    height: calc(100vh - 180px);
+  }
+
+  .banner-slide-title {
+    @apply text-xl;
+  }
+
+  .banner-slide-subtitle {
+    @apply text-base;
+  }
+}
+
+@media (max-width: 1024px) {
+  .banner-slide {
+    @apply w-1/2;
+  }
+}
+
+@media (max-width: 768px) {
+  .banner-section {
+    @apply pt-[150px];
+  }
+
+  .banner-slider-wrapper {
+    height: calc(100vh - 150px);
+  }
+
+  .banner-slide {
+    @apply w-full pb-8;
+  }
+
+  .banner-navigation-button {
+    @apply w-10 h-10 text-sm;
+  }
+
+  .banner-slide-title {
+    @apply text-lg;
+  }
+
+  .banner-slide-subtitle {
+    @apply text-sm;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-section {
+    @apply pt-[130px];
+  }
+
+  .banner-slider-wrapper {
+    height: calc(100vh - 130px);
+  }
+
+  .banner-slide {
+    @apply pb-5;
+  }
+
+  .banner-slide-title {
+    @apply text-base;
+  }
+
+  .banner-slide-subtitle {
+    @apply text-sm;
   }
 }

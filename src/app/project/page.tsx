@@ -78,8 +78,8 @@ export default async function ProjectsPage() {
 
   return (
     <>
-      <BannerSlider projects={projects} />
       <ProjectItem data={projects} />
+      <BannerSlider projects={projects.results} />
     </>
   );
 }

@@ -35,7 +35,7 @@ export default function ProjectItem({ data }) {
 
   return (
     <div>
-      <h1 className="text-6xl mb-4 font-medium justify-center text-center">PROJECT</h1>
+      <h1 className="text-6xl mb-20 font-medium justify-center text-center text-gray-300">PROJECT</h1>
       {data.results.map((project: any, index: number) => {
         const id = project.id;
         const isVisible = visibleItems.has(id);
@@ -47,19 +47,23 @@ export default function ProjectItem({ data }) {
           <div
             key={id}
             ref={(el) => (containerRefs.current[index] = el)} // 각 프로젝트의 DOM 요소 저장
-            className={`flex ${alignmentClass} p-6 m-3 bg-slate-200 rounded-md ${
+            className={`flex ${alignmentClass} p-6 m-32 bg-[rgb(55,55,55)] rounded-md ${
               isVisible ? 'slide-in-bottom' : 'opacity-0'
-            }`}
+            }`} // 하늘색 배경 추가
           >
             {/* 커버 이미지 */}
             {project.cover && project.cover.file && (
-              <div className="flex-shrink-0 mb-4 w-1/2 items-center justify-center">
+              <div
+                className={`flex-shrink-0 mb-4 w-1/2 items-center justify-center ${
+                  isVisible ? 'fade-in-delay' : 'opacity-0'
+                }`}
+              >
                 <img
                   src={project.cover.file.url}
                   alt={`${project.properties.이름.title[0]?.plain_text || 'Untitled'} 커버 이미지`}
                   className="rounded-md"
                   style={{
-                    width: '50%',
+                    width: '100%',
                     height: 'auto',
                     objectFit: 'cover',
                   }}
@@ -68,9 +72,13 @@ export default function ProjectItem({ data }) {
             )}
 
             {/* 텍스트 및 기타 콘텐츠 */}
-            <div className="flex flex-col justify-center w-1/2 px-4">
+            <div
+              className={`flex flex-col justify-center w-1/3 px-4 ${
+                isVisible ? 'fade-in-delay' : 'opacity-0'
+              } text-gray-300`} // 텍스트 색상 적용
+            >
               {/* 이름 */}
-              <h2 className="text-3xl ">{project.properties.이름.title[0]?.plain_text || 'Untitled'}</h2>
+              <h2 className="text-3xl">{project.properties.이름.title[0]?.plain_text || 'Untitled'}</h2>
 
               {/* 기간 */}
               {project.properties.날짜.date && (
