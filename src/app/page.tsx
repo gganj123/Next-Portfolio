@@ -1,6 +1,9 @@
-import Hero from '@/components/home/hero';
-import '@/styles/globals.css';
+import RevealOnScroll from '@/components/RevealOnScroll/RevealOnScroll';
 
 export default function Home() {
-  return <></>;
+  return (
+    <>
+      <RevealOnScroll />
+    </>
+  );
 }

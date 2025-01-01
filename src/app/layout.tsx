@@ -1,5 +1,6 @@
+import { MindBending } from '@/components/MindBending/MindBending';
+import RevealOnScroll from '@/components/RevealOnScroll/RevealOnScroll';
 import { ReactNode } from 'react';
-import RevealOnScroll from './../components/RevealOnScroll';
 
 interface LayoutProps {
   children: ReactNode;
@@ -8,9 +9,7 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <html>
-      <body>
-        <RevealOnScroll />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

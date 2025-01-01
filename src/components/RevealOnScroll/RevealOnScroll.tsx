@@ -3,7 +3,8 @@
 import React, { useLayoutEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import '@/styles/globals.css';
+import './RevealOnScroll.css';
+import { MindBending } from './../MindBending/MindBending';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,22 +33,22 @@ const RevealOnScroll: React.FC = () => {
 
         // ScrollTrigger animations
         ScrollTrigger.create({
-          trigger: '.website-content', // 트리거 대상
+          trigger: '.reveal-content', // 트리거 대상
           start: 'top top', // 스크롤 시작
           end: `+=${contentHolderHeight + imgHolderHeight}`, // 스크롤 끝: 콘텐츠와 이미지 높이 합산
           scrub: true, // 스크롤과 애니메이션 동기화
           onEnter: () => {
-            gsap.set('.website-content', { position: 'fixed', top: '0' });
+            gsap.set('.reveal-content', { position: 'fixed', top: '0' });
           },
           onLeave: () => {
             const calculatedTop = contentHolderHeight + imgHolderHeight;
-            gsap.set('.website-content', { position: 'absolute', top: `${calculatedTop}px` });
+            gsap.set('.reveal-content', { position: 'absolute', top: `${calculatedTop}px` });
           },
           onLeaveBack: () => {
-            gsap.set('.website-content', { position: 'fixed', top: '0' });
+            gsap.set('.reveal-content', { position: 'fixed', top: '0' });
           },
           onEnterBack: () => {
-            gsap.set('.website-content', { position: 'fixed', top: '0' });
+            gsap.set('.reveal-content', { position: 'fixed', top: '0' });
           },
         });
 
@@ -98,24 +99,16 @@ const RevealOnScroll: React.FC = () => {
       }
     };
 
-    // requestAnimationFrame을 통해 DOM 렌더링 후 애니메이션 설정
     requestAnimationFrame(() => {
       setIsReady(true); // 글씨와 그림을 표시
-      setTimeout(() => {
-        initializeAnimations(); // 애니메이션 초기화
-        ScrollTrigger.refresh();
-      }, 500); // DOM 안정화를 위해 약간의 지연 추가
+      initializeAnimations(); // 애니메이션 초기화
+      ScrollTrigger.refresh();
     });
 
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // 모든 ScrollTrigger 인스턴스 정리
     };
   }, [uniqueKey]); // key 값이 변경될 때마다 초기화
-
-  // key 값 갱신 함수
-  const refreshKey = () => {
-    setUniqueKey((prevKey) => prevKey + 1);
-  };
 
   return (
     <>
@@ -127,7 +120,7 @@ const RevealOnScroll: React.FC = () => {
       )}
 
       {/* 실제 콘텐츠 */}
-      <div className="logo"></div>
+      <div className="logo text-3xl">Dony's Portfolio</div>
       <div className="header">
         <div className="letters">
           <div>f</div>
@@ -142,9 +135,9 @@ const RevealOnScroll: React.FC = () => {
           <div>d</div>
         </div>
       </div>
-      <div className="website-content" key={uniqueKey}>
+      <div className="reveal-content" key={uniqueKey}>
         <div className="img-holder">
-          <img src="./basecamp.jpg" alt="Basecamp" />
+          <img src="./space4.webp" alt="space" />
         </div>
 
         <div className="content-holder">
@@ -162,20 +155,9 @@ const RevealOnScroll: React.FC = () => {
             <p>프론트엔드 개발자 김도현입니다.</p>
           </div>
 
-          <div className="row">
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore sint eum fugit, nostrum necessitatibus
-              beatae deleniti tempore velit recusandae quasi aliquam unde voluptates vero, quos, molestiae nobis quae?
-              Dolorum, molestiae.
-            </p>
-          </div>
+          <div className="row">{/* <MindBending /> */}</div>
         </div>
       </div>
-
-      {/* key 값 갱신 버튼 */}
-      <button onClick={refreshKey} className="fixed bottom-4 right-4 bg-blue-500 text-white p-2 rounded">
-        Refresh Animation
-      </button>
     </>
   );
 };

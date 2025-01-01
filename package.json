@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@studio-freight/lenis": "^1.0.42",
     "@svgr/cli": "^8.1.0",
     "dotenv": "^16.4.7",
     "gsap": "^3.12.5",

@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overscroll-behavior: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html,
+body {
+  font-family: 'Neue Montreal';
+  height: 100%;
+}
+
+h1 {
+  font-size: 80px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  width: 50%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 2em;
+  color: lightgray;
+  border-radius: 100%;
+  z-index: 10000;
+}
+
+.header {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 100%;
+  z-index: 2;
+}
+
+.letters {
+  flex: 1;
+  display: flex;
+  text-transform: uppercase;
+}
+
+.letters > div {
+  flex: 1;
+  font-size: 18vw;
+  font-weight: 400;
+  color: #000;
+  text-align: center;
+}
+
+.reveal-content {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.img-holder {
+  position: relative;
+  top: 0;
+  width: 100%;
+  height: 100vh; /* 화면 높이 전체 */
+  background: #666; /* 배경색 */
+  clip-path: polygon(37.5% 20%, 62.5% 20%, 62.5% 80%, 37.5% 80%); /* 클립 경로 */
+  transform: rotate(30deg); /* 30도 회전 */
+}
+
+.img-holder img {
+  position: relative;
+  transform: scale(2);
+}
+.row {
+  margin: 2em 1em;
+}
+
+.content-holder {
+  position: relative;
+  top: -5px;
+  width: 100%;
+  background: #000;
+  color: #ffffff;
+  padding: 1em;
+}
+
+.img {
+  width: 200px;
+  height: 275px;
+}
+
+/* 여기까지가 스타일!! */
