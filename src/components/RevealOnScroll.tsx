@@ -46,6 +46,9 @@ const RevealOnScroll: React.FC = () => {
           onLeaveBack: () => {
             gsap.set('.website-content', { position: 'fixed', top: '0' });
           },
+          onEnterBack: () => {
+            gsap.set('.website-content', { position: 'fixed', top: '0' });
+          },
         });
 
         gsap.to('.header .letters:first-child', {
