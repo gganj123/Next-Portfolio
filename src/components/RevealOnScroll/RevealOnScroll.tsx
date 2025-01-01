@@ -10,10 +10,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 const RevealOnScroll: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
-  const [uniqueKey, setUniqueKey] = useState(0); // 고유한 key 상태
 
   useLayoutEffect(() => {
-    // 애니메이션 초기화 함수
     const initializeAnimations = () => {
       const contentHolder = document.querySelector<HTMLElement>('.content-holder');
       const imgHolder = document.querySelector<HTMLElement>('.img-holder');
@@ -26,17 +24,16 @@ const RevealOnScroll: React.FC = () => {
         // Total body height calculation
         const totalBodyHeight = contentHolderHeight + imgHolderHeight + additionalScrollHeight;
 
-        // Conditionally update the body height
         if (document.body.style.height !== `${totalBodyHeight}px`) {
           document.body.style.height = `${totalBodyHeight}px`;
         }
 
-        // ScrollTrigger animations
+        // ScrollTrigger for reveal-content
         ScrollTrigger.create({
-          trigger: '.reveal-content', // 트리거 대상
-          start: 'top top', // 스크롤 시작
-          end: `+=${contentHolderHeight + imgHolderHeight}`, // 스크롤 끝: 콘텐츠와 이미지 높이 합산
-          scrub: true, // 스크롤과 애니메이션 동기화
+          trigger: '.reveal-content',
+          start: 'top top',
+          end: `+=${contentHolderHeight + imgHolderHeight}`,
+          scrub: true,
           onEnter: () => {
             gsap.set('.reveal-content', { position: 'fixed', top: '0' });
           },
@@ -49,6 +46,17 @@ const RevealOnScroll: React.FC = () => {
           },
           onEnterBack: () => {
             gsap.set('.reveal-content', { position: 'fixed', top: '0' });
+          },
+        });
+
+        // GSAP animations for MindBending container
+        gsap.to('.mindbending-container', {
+          opacity: 1,
+          scrollTrigger: {
+            trigger: '.mindbending-container',
+            start: 'top 200px',
+            end: 'bottom center',
+            scrub: true,
           },
         });
 
@@ -94,32 +102,54 @@ const RevealOnScroll: React.FC = () => {
             scrub: 1,
           },
         });
+        ScrollTrigger.create({
+          trigger: '.reveal-content',
+          start: 'top top',
+
+          end: '+=1500', // 원하는 스크롤 길이 지정
+          scrub: true,
+          onEnter: () => {
+            gsap.set('.reveal-content', { position: 'fixed', top: '0' });
+          },
+          onLeave: () => {
+            gsap.set('.reveal-content', { position: 'absolute', top: '150vh' }); // 화면 아래로 스크롤
+          },
+        });
+
+        // MindBending의 시작 지점을 RevealOnScroll의 끝나는 지점으로 설정
+        ScrollTrigger.create({
+          trigger: '.mindbending-container',
+          start: 3000, // RevealOnScroll이 끝난 뒤 MindBending 시작
+          end: '+=3000', // MindBending 애니메이션 길이
+          scrub: true,
+          onEnter: () => {
+            gsap.set('.mindbending-container', { opacity: 1 });
+          },
+        });
       } else {
         console.error('Required elements .content-holder or .img-holder not found.');
       }
     };
 
     requestAnimationFrame(() => {
-      setIsReady(true); // 글씨와 그림을 표시
-      initializeAnimations(); // 애니메이션 초기화
+      setIsReady(true);
+      initializeAnimations();
       ScrollTrigger.refresh();
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // 모든 ScrollTrigger 인스턴스 정리
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, [uniqueKey]); // key 값이 변경될 때마다 초기화
+  }, []);
 
   return (
     <>
-      {/* 로딩 화면 (애니메이션 전 준비 상태) */}
       {!isReady && (
         <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
           <p>Loading...</p>
         </div>
       )}
 
-      {/* 실제 콘텐츠 */}
       <div className="logo text-3xl">Dony's Portfolio</div>
       <div className="header">
         <div className="letters">
@@ -135,27 +165,17 @@ const RevealOnScroll: React.FC = () => {
           <div>d</div>
         </div>
       </div>
-      <div className="reveal-content" key={uniqueKey}>
+      <div className="reveal-content">
         <div className="img-holder">
           <img src="./space4.webp" alt="space" />
         </div>
 
         <div className="content-holder">
           <div className="row">
-            <h1>About Me</h1>
-          </div>
-
-          <div className="row">
-            <div className="img">
-              <img src="/japan.jpg" alt="Japan" className="" />
+            <div className="mindbending-container">
+              <MindBending />
             </div>
           </div>
-
-          <div className="row">
-            <p>프론트엔드 개발자 김도현입니다.</p>
-          </div>
-
-          <div className="row">{/* <MindBending /> */}</div>
         </div>
       </div>
     </>

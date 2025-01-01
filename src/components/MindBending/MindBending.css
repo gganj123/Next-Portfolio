@@ -22,7 +22,7 @@ h1 {
 section.hero {
   width: 100vw;
   height: 100vh;
-  background: url('../../../public/space2.png') no-repeat 50% 50%;
+  background: url('../../../public/space2.png') no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;

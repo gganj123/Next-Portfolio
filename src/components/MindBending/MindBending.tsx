@@ -121,9 +121,9 @@ export const MindBending: React.FC = () => {
 
   return (
     <div className="container">
-      <section className="hero">
+      {/* <section className="hero">
         <h1>Symphonia</h1>
-      </section>
+      </section> */}
 
       <section className="info">
         <div className="header-rows">
