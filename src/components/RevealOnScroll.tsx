@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const RevealOnScroll: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
+  const [uniqueKey, setUniqueKey] = useState(0); // 고유한 key 상태
 
   useLayoutEffect(() => {
     // 애니메이션 초기화 함수
@@ -29,16 +30,18 @@ const RevealOnScroll: React.FC = () => {
           document.body.style.height = `${totalBodyHeight}px`;
         }
 
-        // Refresh ScrollTrigger after height adjustment
-        ScrollTrigger.refresh();
-
         // ScrollTrigger animations
         ScrollTrigger.create({
-          trigger: '.website-content',
-          start: '-0.1% top',
-          end: 'bottom bottom',
+          trigger: '.website-content', // 트리거 대상
+          start: 'top top', // 스크롤 시작
+          end: `+=${contentHolderHeight + imgHolderHeight}`, // 스크롤 끝: 콘텐츠와 이미지 높이 합산
+          scrub: true, // 스크롤과 애니메이션 동기화
           onEnter: () => {
-            gsap.set('.website-content', { position: 'absolute', top: '195%' });
+            gsap.set('.website-content', { position: 'fixed', top: '0' });
+          },
+          onLeave: () => {
+            const calculatedTop = contentHolderHeight + imgHolderHeight;
+            gsap.set('.website-content', { position: 'absolute', top: `${calculatedTop}px` });
           },
           onLeaveBack: () => {
             gsap.set('.website-content', { position: 'fixed', top: '0' });
@@ -97,9 +100,19 @@ const RevealOnScroll: React.FC = () => {
       setIsReady(true); // 글씨와 그림을 표시
       setTimeout(() => {
         initializeAnimations(); // 애니메이션 초기화
-      }, 1000); // DOM 안정화를 위해 약간의 지연 추가
+        ScrollTrigger.refresh();
+      }, 500); // DOM 안정화를 위해 약간의 지연 추가
     });
-  }, []);
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill()); // 모든 ScrollTrigger 인스턴스 정리
+    };
+  }, [uniqueKey]); // key 값이 변경될 때마다 초기화
+
+  // key 값 갱신 함수
+  const refreshKey = () => {
+    setUniqueKey((prevKey) => prevKey + 1);
+  };
 
   return (
     <>
@@ -126,7 +139,7 @@ const RevealOnScroll: React.FC = () => {
           <div>d</div>
         </div>
       </div>
-      <div className="website-content">
+      <div className="website-content" key={uniqueKey}>
         <div className="img-holder">
           <img src="./basecamp.jpg" alt="Basecamp" />
         </div>
@@ -155,6 +168,11 @@ const RevealOnScroll: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* key 값 갱신 버튼 */}
+      <button onClick={refreshKey} className="fixed bottom-4 right-4 bg-blue-500 text-white p-2 rounded">
+        Refresh Animation
+      </button>
     </>
   );
 };

@@ -88,10 +88,10 @@ img {
   position: relative;
   top: 0;
   width: 100%;
-  height: 100vh;
-  background: #ffffff;
-  clip-path: polygon(37.5% 20%, 62.5% 20%, 62.5% 80%, 37.5% 80%);
-  transform: rotate(30deg);
+  height: 100vh; /* 화면 높이 전체 */
+  background: #666; /* 배경색 */
+  clip-path: polygon(37.5% 20%, 62.5% 20%, 62.5% 80%, 37.5% 80%); /* 클립 경로 */
+  transform: rotate(30deg); /* 30도 회전 */
 }
 
 .img-holder img {
