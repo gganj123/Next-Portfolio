@@ -78,6 +78,24 @@ section.info {
   font-weight: lighter;
 }
 
+.em {
+  position: relative;
+  width: 100vw;
+  height: 165vh;
+  /* 원래 100% 였는데 100vh로 수정했음 */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #000;
+  color: #fff;
+}
+
+.em p {
+  padding: 1em;
+  font-size: 52px;
+  font-weight: lighter;
+}
+
 .header-images {
   width: 100%;
   height: 250px;
@@ -90,15 +108,6 @@ section.info {
   width: 100%;
   height: 100%;
 }
-
-section.pinned {
-  position: absolute;
-  top: 100vh;
-  width: 100%;
-  height: 250vh;
-  z-index: 2;
-}
-
 section.whitespace {
   position: relative;
   width: 100vw;
@@ -108,6 +117,15 @@ section.whitespace {
   z-index: -1;
 }
 
+section.pinned {
+  position: absolute;
+  top: 165vh;
+  width: 100%;
+  height: 50vh;
+  visibility: visible; /* 항상 보이도록 설정 */
+  z-index: 2; /* 다른 요소 위에 위치 */
+}
+
 .revealer {
   position: absolute;
   transform: translate(-50%, 0%);
@@ -115,6 +133,7 @@ section.whitespace {
   margin-top: 325px;
   width: 120px;
   height: 120px;
+  z-index: 3;
 }
 
 .revealer .revealer-1 {
@@ -144,9 +163,6 @@ section.website-content {
   height: 150vh;
   background-color: #fff;
   z-index: 10; /* 다른 섹션 위에 위치 */
-  display: flex; /* 텍스트 정렬을 위해 flex 사용 */
-  justify-content: center; /* 가로 중앙 정렬 */
-  left: 12%;
 }
 
 .website-content h1 {

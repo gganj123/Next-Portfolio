@@ -141,7 +141,7 @@ const RevealOnScroll: React.FC = () => {
         ScrollTrigger.create({
           trigger: ".mindbending-container",
           start: `${mindBendingStart}px top`, // RevealOnScroll 끝나고 100vh 후 시작
-          end: "+=2000", // MindBending 애니메이션 길이
+          end: "+=5000", // MindBending 애니메이션 길이
           scrub: true,
           onEnter: () => {
             gsap.set(".mindbending-container", { opacity: 1 }); // MindBending 시작

@@ -132,23 +132,30 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       <section className="info">
         <div className="header-rows">
           <div className="header-row">
-            <h1>Motion</h1>
+            <h1>ABOUT ME</h1>
           </div>
           <div className="header-row">
-            <h1>Stills</h1>
+            <h1>Skills</h1>
           </div>
         </div>
       </section>
-
+      <section className="em">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
+          fuga porro laudantium rerum possimus, eum incidunt, et fugit, totam
+          tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus.
+          Repudiandae, quaerat non.
+        </p>
+      </section>
       <section className="header-info">
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta
-          ratione minus libero. Debitis aperiam modi, cupiditate itaque dolor
-          reiciendis omnis? Repellat, ea numquam provident ad molestias minus
-          laudantium saepe dignissimos.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
+          fuga porro laudantium rerum possimus, eum incidunt, et fugit, totam
+          tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus.
+          Repudiandae, quaerat non.
         </p>
 
-        <div className="header-images">
+        {/* <div className="header-images">
           <div className="img">
             <img src="space.png" alt="Space 1" />
           </div>
@@ -161,7 +168,7 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
           <div className="img">
             <img src="space4.webp" alt="Space 4" />
           </div>
-        </div>
+        </div> */}
       </section>
 
       <section className="whitespace"></section>
