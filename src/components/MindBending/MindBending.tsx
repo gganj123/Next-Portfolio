@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import React, { useLayoutEffect, useState } from "react";
-import Lenis from "@studio-freight/lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useLayoutEffect, useState } from 'react';
+import Lenis from '@studio-freight/lenis';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import "@/styles/globals.css";
-import "./MindBending.css";
+import '@/styles/globals.css';
+import './MindBending.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,50 +19,66 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
 
   useLayoutEffect(() => {
     const lenis = new Lenis();
-    lenis.on("scroll", ScrollTrigger.update);
+    lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
+    const vhToPx = (vh) => (vh * window.innerHeight) / 100;
 
     const initializeAnimations = () => {
       ScrollTrigger.create({
-        trigger: ".pinned",
-        start: "top top",
-        endTrigger: ".whitespace",
-        end: "bottom top",
+        trigger: '.pinned',
+        start: `top top`, // 140vh를 픽셀로 변환
+        endTrigger: '.whitespace',
+        end: 'bottom top',
+        markers: true,
         pin: true,
         pinSpacing: false,
+        onUpdate: (self) => {
+          // self는 ScrollTrigger 인스턴스
+          console.log('Start:', self.start); // 시작 위치 (픽셀)
+          console.log('End:', self.end); // 종료 위치 (픽셀)
+          console.log('Progress:', self.progress); // 진행도 (0 ~ 1)
+        },
       });
 
       // ScrollTrigger 고정 효과 추가 (.header-info 섹션)
       ScrollTrigger.create({
-        trigger: ".header-info",
-        start: "top top",
-        endTrigger: ".whitespace",
-        end: "bottom top",
+        trigger: '.header-info',
+        start: 'top top',
+        endTrigger: '.whitespace',
+        end: 'bottom top',
         pin: true,
         pinSpacing: false,
       });
 
       ScrollTrigger.create({
-        trigger: ".pinned",
-        start: "top top",
-        endTrigger: ".header-info",
-        end: "bottom bottom",
+        trigger: '.pinned',
+        start: `top top`, // 140vh를 픽셀로 변환
+        endTrigger: '.header-info',
+        end: 'bottom bottom',
 
         onUpdate: (self) => {
           const rotation = self.progress * 360; // 스크롤 진행도에 따라 회전 각도 계산
-          gsap.to(".revealer", { rotation }); // .revealer에 회전 애니메이션 적용
+          gsap.to('.revealer', { rotation }); // .revealer에 회전 애니메이션 적용
+        },
+        onEnter: () => {
+          // .pinned2를 사라지게 만듦
+          gsap.to('.pinrr', { opacity: 0, duration: 0 });
+        },
+        onLeaveBack: () => {
+          // 스크롤이 뒤로 돌아갔을 때 다시 보이게 만듦
+          gsap.to('.pinrr', { opacity: 1, duration: 0 });
         },
       });
 
       // ScrollTrigger 고정 효과 및 클립 패스 애니메이션 추가
       ScrollTrigger.create({
-        trigger: ".pinned",
-        start: "top top",
-        endTrigger: ".header-info",
-        end: "bottom bottom",
+        trigger: '.pinned',
+        start: `top top`, // 140vh를 픽셀로 변환
+        endTrigger: '.header-info',
+        end: 'bottom bottom',
 
         onUpdate: (self) => {
           const progress = self.progress; // 스크롤 진행도 계산
@@ -73,41 +89,41 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
           ${45 - 45 * progress}% ${100 - 0 * progress}%
         )`;
 
-          gsap.to(".revealer-1, .revealer-2", {
+          gsap.to('.revealer-1, .revealer-2', {
             clipPath: clipPath,
-            ease: "none",
+            ease: 'none',
             duration: 0, // 즉각적인 반응
           });
         },
       });
 
       ScrollTrigger.create({
-        trigger: ".header-info",
-        start: "top top",
-        end: "bottom 50%",
+        trigger: '.header-info',
+        start: 'top top',
+        end: 'bottom 50%',
         scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress; // 스크롤 진행도 (0 ~ 1)
           const left = 35 + 15 * progress; // left 값 계산
-          gsap.to(".revealer", {
+          gsap.to('.revealer', {
             left: `${left}%`, // left 값을 동적으로 업데이트
-            ease: "none", // 부드러운 효과 제거
+            ease: 'none', // 부드러운 효과 제거
             duration: 0, // 즉시 반응
           });
         },
       });
 
       ScrollTrigger.create({
-        trigger: ".whitespace", // 애니메이션 대상 트리거
-        start: "top 50%", // 애니메이션 시작 시점
-        end: "bottom bottom", // 애니메이션 끝 시점
+        trigger: '.whitespace', // 애니메이션 대상 트리거
+        start: 'top 50%', // 애니메이션 시작 시점
+        end: 'bottom bottom', // 애니메이션 끝 시점
         scrub: 1, // 스크롤과 동기화
 
         onUpdate: (self) => {
           const scale = 1 + 12 * self.progress; // 스크롤 진행도에 따라 스케일 계산
-          gsap.to(".revealer", {
+          gsap.to('.revealer', {
             scale: scale, // 계산된 스케일 값 적용
-            ease: "none", // 부드러운 효과 제거
+            ease: 'none', // 부드러운 효과 제거
             duration: 0, // 즉시 반응
           });
         },
@@ -141,18 +157,16 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       </section>
       <section className="em">
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-          fuga porro laudantium rerum possimus, eum incidunt, et fugit, totam
-          tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus.
-          Repudiandae, quaerat non.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur fuga porro laudantium rerum possimus,
+          eum incidunt, et fugit, totam tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus. Repudiandae,
+          quaerat non.
         </p>
       </section>
       <section className="header-info">
         <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur
-          fuga porro laudantium rerum possimus, eum incidunt, et fugit, totam
-          tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus.
-          Repudiandae, quaerat non.
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur fuga porro laudantium rerum possimus,
+          eum incidunt, et fugit, totam tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus. Repudiandae,
+          quaerat non.
         </p>
 
         {/* <div className="header-images">
@@ -174,6 +188,13 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       <section className="whitespace"></section>
 
       <section className="pinned">
+        <div className="revealer">
+          <div className="revealer-1"></div>
+          <div className="revealer-2"></div>
+        </div>
+      </section>
+
+      <section className="pinrr">
         <div className="revealer">
           <div className="revealer-1"></div>
           <div className="revealer-2"></div>
