@@ -15,8 +15,26 @@ img {
 h1 {
   text-transform: uppercase;
   font-size: 200px;
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: -4px;
+}
+.info p {
+  margin-left: 10%;
+  font-size: 26px;
+  font-weight: lighter;
+}
+
+.left {
+  height: 20%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: end;
+}
+.right {
+  height: 27%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: end;
 }
 
 section.hero {
@@ -73,8 +91,9 @@ section.info {
 }
 
 .header-info p {
-  padding: 1em;
-  font-size: 52px;
+  margin: 2em;
+  padding: 2em;
+  font-size: 26px;
   font-weight: lighter;
 }
 
@@ -82,7 +101,6 @@ section.info {
   position: relative;
   width: 100vw;
   height: 165vh;
-  /* 원래 100% 였는데 100vh로 수정했음 */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -91,8 +109,10 @@ section.info {
 }
 
 .em p {
-  padding: 1em;
-  font-size: 52px;
+  margin: 2em;
+
+  padding: 2em;
+  font-size: 26px;
   font-weight: lighter;
 }
 

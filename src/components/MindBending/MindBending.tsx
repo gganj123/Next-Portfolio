@@ -24,7 +24,6 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
-    const vhToPx = (vh) => (vh * window.innerHeight) / 100;
 
     const initializeAnimations = () => {
       ScrollTrigger.create({
@@ -148,26 +147,25 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       <section className="info">
         <div className="header-rows">
           <div className="header-row">
-            <h1>ABOUT ME</h1>
+            <h1>Dony's</h1>
           </div>
           <div className="header-row">
-            <h1>Skills</h1>
+            <h1>Portfolio</h1>
           </div>
+        </div>
+        <div className="left">
+          <p>안녕하세요 프론트엔드 개발자 김도현입니다.</p>
+        </div>
+
+        <div className="right">
+          <p>사용자가 몰입하고 즐길 수 있는 경험을 만드는 것이 제 목표입니다.</p>
         </div>
       </section>
       <section className="em">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur fuga porro laudantium rerum possimus,
-          eum incidunt, et fugit, totam tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus. Repudiandae,
-          quaerat non.
-        </p>
+        <p> 여기에서 그 노력의 결과를 확인해 주세요.</p>
       </section>
       <section className="header-info">
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequuntur fuga porro laudantium rerum possimus,
-          eum incidunt, et fugit, totam tempora quaerat quidem nulla eos! Voluptatibus, beatae accusamus. Repudiandae,
-          quaerat non.
-        </p>
+        <p> 여기에서 그 노력의 결과를 확인해 주세요.</p>
 
         {/* <div className="header-images">
           <div className="img">
