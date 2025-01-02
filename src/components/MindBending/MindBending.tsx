@@ -4,7 +4,6 @@ import React, { useLayoutEffect, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import HyperText from '@/components/ui/hyper-text';
 
 import '@/styles/globals.css';
 import './MindBending.css';
@@ -47,7 +46,7 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       ScrollTrigger.create({
         trigger: '.header-info',
         start: 'top top',
-        endTrigger: '.whitespace',
+        endTrigger: '.whitebpace',
         end: 'bottom top',
         pin: true,
         pinSpacing: false,
@@ -120,7 +119,7 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
         scrub: 1, // 스크롤과 동기화
 
         onUpdate: (self) => {
-          const scale = 1 + 12 * self.progress; // 스크롤 진행도에 따라 스케일 계산
+          const scale = 1 + 16 * self.progress; // 스크롤 진행도에 따라 스케일 계산
           gsap.to('.revealer', {
             scale: scale, // 계산된 스케일 값 적용
             ease: 'none', // 부드러운 효과 제거
@@ -128,7 +127,6 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
           });
         },
       });
-      ScrollTrigger.refresh(); // 위치와 크기 다시 계산
     };
 
     ScrollTrigger.create({
@@ -203,6 +201,7 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       </section>
 
       <section className="whitespace"></section>
+      <section className="whitebpace"></section>
 
       <section className="pinned">
         <div className="revealer">
