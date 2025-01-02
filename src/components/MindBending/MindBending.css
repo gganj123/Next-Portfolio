@@ -22,7 +22,7 @@ h1 {
 section.hero {
   width: 100vw;
   height: 100vh;
-  background: url('../../../public/space2.png') no-repeat;
+  background: url("../../../public/space2.png") no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -30,7 +30,7 @@ section.hero {
 }
 
 .hero h1 {
-  font-family: 'PP Editorial Old';
+  font-family: "PP Editorial Old";
   font-weight: lighter;
   color: #fff;
 }
