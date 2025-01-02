@@ -4,6 +4,7 @@ import React, { useLayoutEffect, useState } from 'react';
 import Lenis from '@studio-freight/lenis';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import HyperText from '@/components/ui/hyper-text';
 
 import '@/styles/globals.css';
 import './MindBending.css';
@@ -24,14 +25,14 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       lenis.raf(time * 1000);
     });
     gsap.ticker.lagSmoothing(0);
+    const vhToPx = (vh) => (vh * window.innerHeight) / 100;
 
     const initializeAnimations = () => {
       ScrollTrigger.create({
         trigger: '.pinned',
-        start: `top top`, // 140vh를 픽셀로 변환
+        start: `top top`,
         endTrigger: '.whitespace',
         end: 'bottom top',
-        markers: true,
         pin: true,
         pinSpacing: false,
         onUpdate: (self) => {
@@ -130,6 +131,24 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       ScrollTrigger.refresh(); // 위치와 크기 다시 계산
     };
 
+    ScrollTrigger.create({
+      trigger: '.header-rows',
+      start: `${vhToPx(95)}px top center`, // 트리거 시작 지점
+      end: 'bottom center',
+      onEnter: () => {
+        document.querySelectorAll('.header-row h1').forEach((el) => {
+          el.classList.remove('tracking-out-expand'); // 이전 클래스 제거
+          el.classList.add('tracking-in-contract'); // 새로운 클래스 추가
+        });
+      },
+      onLeaveBack: () => {
+        document.querySelectorAll('.header-row h1').forEach((el) => {
+          el.classList.remove('tracking-in-contract'); // 이전 클래스 제거
+          el.classList.add('tracking-out-expand'); // 새로운 클래스 추가
+        });
+      },
+    });
+
     initializeAnimations();
 
     // Clean-up function
@@ -147,10 +166,10 @@ export const MindBending: React.FC<MindBendingProps> = ({ start }) => {
       <section className="info">
         <div className="header-rows">
           <div className="header-row">
-            <h1>Dony's</h1>
+            <h1 className="tracking-placeholder">Dony's</h1>
           </div>
           <div className="header-row">
-            <h1>Portfolio</h1>
+            <h1 className="tracking-placeholder">Portfolio</h1>
           </div>
         </div>
         <div className="left">

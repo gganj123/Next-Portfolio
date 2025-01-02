@@ -11,13 +11,16 @@
   "dependencies": {
     "@studio-freight/lenis": "^1.0.42",
     "@svgr/cli": "^8.1.0",
+    "clsx": "^2.1.1",
     "dotenv": "^16.4.7",
     "gsap": "^3.12.5",
+    "motion": "^11.15.0",
     "next": "15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
-    "react-lottie-player": "^2.1.0"
+    "react-lottie-player": "^2.1.0",
+    "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
